@@ -7,7 +7,7 @@ int main()
     Tensor<int> t4({4});
     t1.shape_print();
     t1.sizes_print();
-    vector<int> v1 = {1, 2, 4, 16, 3, 1, 6, 8, 17, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+    vector<int> v1 = {1, 2, 4, 16, 3, 1, 6, 8, 17, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
 
     t1.set_all(v1);
     vector<int> v2 = {1, 2, 3, 4};
@@ -37,13 +37,29 @@ int main()
     //t3.sizes_print();
     //cout << t3.at({4, 0, 1}) << endl;
     t4.set_all(v2);
-    t4.broadcast_to(t1);
+    t4 = t4.broadcast_to(t1);
     t4.shape_print();
     t4.sizes_print();
     cout << t4.at({1, 2, 0});
 
     auto soso = t1.add(t2);
     soso.data_print();
+
+    auto hadamard_prod = t1.multiply(t2);
+    cout << "hadamard_prod: " << endl;
+    hadamard_prod.data_print();
+
+    Tensor<int> t5({1, 2});
+    Tensor<int> t6({2, 1});
+    vector<int> data5 = {1, 2};
+    vector<int> data6 = {2, 3};
+    t5.set_all(data5);
+    t6.set_all(data6);
+
+    Tensor<int> t7 = t5.matmul(t6);
+    t7.data_print();
+
+
 
 
 
